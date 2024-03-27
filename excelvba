@@ -1,0 +1,21 @@
+Private Sub Worksheet_Change(ByVal Target As Range)
+    Dim DateCell As Range
+    Dim WatchRange As Range
+    Dim IntersectRange As Range
+    
+    ' Define the range where changes should be tracked
+    Set WatchRange = Range("A1:A100") ' Change this range to the desired range
+    
+    ' Define the cell where you want to record the date of change
+    Set DateCell = Range("B1") ' Change this to the cell where you want the date recorded
+    
+    ' Check if the changed cell is within the watch range
+    Set IntersectRange = Intersect(Target, WatchRange)
+    
+    ' If the changed cell is within the watch range, record the date
+    If Not IntersectRange Is Nothing Then
+        Application.EnableEvents = False
+        DateCell.Value = Now
+        Application.EnableEvents = True
+    End If
+End Sub
